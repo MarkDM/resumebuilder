@@ -11,36 +11,78 @@ interface ResumeData {
 }
 
 function ResumePreview({ resumeData }: { resumeData: ResumeData }) {
-    const previewRef = useRef<HTMLDivElement>(null);
+    const containerRef = useRef<HTMLDivElement>(null);
+    const [scale, setScale] = useState<number>(1);
+
+    const BASE_WIDTH = 595; // A4 width in px @72dpi
+    const BASE_HEIGHT = 842;
 
     useEffect(() => {
-        if (!previewRef.current) return;
+        function handleResize() {
+            if (containerRef.current) {
+                const parent = containerRef.current.parentElement;
+                if (!parent) return;
 
-    }, [resumeData]);
+                // Get the maximum size available
+                const maxWidth = parent.clientWidth;
+                const maxHeight = parent.clientHeight;
+
+                // Calculate the scale factor while maintaining A4 aspect
+                const widthScale = maxWidth / BASE_WIDTH;
+                const heightScale = maxHeight / BASE_HEIGHT;
+                const newScale = Math.min(widthScale, heightScale);
+
+                setScale(newScale);
+            }
+        }
+
+        handleResize();
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     return (
-
-        <div className="aspect-[210/297] w-full max-w-[67vh]">
+        <div ref={containerRef} className="aspect-[210/297] w-full max-w-[67vh]">
             <div
-                ref={previewRef}
-                className="rounded-sm bg-gray-200 w-full h-full p-5"
+                style={{
+                    width: `${BASE_WIDTH}px`,
+                    height: `${BASE_HEIGHT}px`,
+                    transform: `scale(${scale})`,
+                    transformOrigin: 'top left',
+                }}
             >
-                <h2 className='text-gray-700'>{resumeData.name}</h2>
-                <p>{resumeData.email}</p>
-                <p>{resumeData.message}</p>
+                <div className="bg-gray-200 w-full h-full p-5">
+                    <div className="flex flex-row items-start">
+
+                        {/* Image */}
+                        <div className="bg-gray-400 rounded-lg aspect-square w-[15%] shrink-0" />
+
+                        {/* Header fields */}
+                        <div className='flex flex-col items-start ml-5'>
+                            <h2 className=" text-gray-600 font-bold text-[16px] leading-tight whitespace-nowrap overflow-hidden text-ellipsis">
+                                {resumeData.name}
+                            </h2>
+
+                            <h2 className=" text-gray-600 font-semibold text-[14px] leading-tight whitespace-nowrap overflow-hidden text-ellipsis">
+                                {resumeData.email}
+                            </h2>
+                        </div>
+
+                    </div>
+                </div>
             </div>
         </div>
-
     );
 }
+
 
 
 function ResumeBuilder() {
     const formRef = useRef<HTMLDivElement>(null);
 
     const [resumeData, setResumeData] = useState<ResumeData>({
-        name: '',
-        email: '',
+        name: 'Your Name',
+        email: 'Your Email',
         message: '',
     });
 
@@ -61,89 +103,6 @@ function ResumeBuilder() {
 
             <div className='md:mt-0 mt-5 md:w-[50%] ml-5 flex justify-center items-center'>
                 <ResumePreview resumeData={resumeData} />
-            </div>
-        </div>
-    )
-}
-
-
-function HeaderFields() {
-    return (
-        <div className="space-y-4">
-            <div>
-                <label className="block text-sm font-semibold mb-1" htmlFor="fullName">
-                    Full Name <span className="text-red-500">*</span>
-                </label>
-                <input
-                    id="fullName"
-                    type="text"
-                    className="w-full px-3 py-2 input"
-                    placeholder="Your fullname"
-                    required
-                />
-            </div>
-
-            <div>
-                <label className="block text-sm font-semibold mb-1" htmlFor="role">
-                    Cargo ou área de atuação <span className="text-red-500">*</span>
-                </label>
-                <input
-                    id="role"
-                    type="text"
-                    className="w-full px-3 py-2 input"
-                    placeholder="Ex: Desenvolvedor Full Stack"
-                    required
-                />
-            </div>
-
-            <div>
-                <label className="block text-sm font-semibold mb-1" htmlFor="phone">
-                    Telefone (com DDD) <span className="text-red-500">*</span>
-                </label>
-                <input
-                    id="phone"
-                    type="tel"
-                    className="w-full px-3 py-2 input"
-                    placeholder="(11) 91234-5678"
-                    required
-                />
-            </div>
-
-            <div>
-                <label className="block text-sm font-semibold mb-1" htmlFor="email">
-                    E-mail profissional <span className="text-red-500">*</span>
-                </label>
-                <input
-                    id="email"
-                    type="email"
-                    className="w-full px-3 py-2 input"
-                    placeholder="seu@email.com"
-                    required
-                />
-            </div>
-
-            <div>
-                <label className="block text-sm font-semibold mb-1" htmlFor="links">
-                    LinkedIn/GitHub/Portfólio
-                </label>
-                <input
-                    id="links"
-                    type="text"
-                    className="w-full px-3 py-2 input"
-                    placeholder="URL do LinkedIn, GitHub ou Portfólio"
-                />
-            </div>
-
-            <div>
-                <label className="block text-sm font-semibold mb-1" htmlFor="location">
-                    Cidade/Estado
-                </label>
-                <input
-                    id="location"
-                    type="text"
-                    className="w-full px-3 py-2 input"
-                    placeholder="Ex: São Paulo/SP"
-                />
             </div>
         </div>
     )
