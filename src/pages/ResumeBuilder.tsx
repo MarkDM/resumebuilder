@@ -19,13 +19,18 @@ function ResumePreview({ resumeData }: { resumeData: ResumeData }) {
     }, [resumeData]);
 
     return (
-        <div>
-            <div  ref={previewRef} style={{ padding: 24, width: 400,background: "#fff" }}>
-                <h2 style={{ fontWeight: "bold", fontSize: 24 }}>{resumeData.name}</h2>
-                <p style={{ margin: "8px 0" }}>{resumeData.email}</p>
+
+        <div className="aspect-[210/297] w-full max-w-[67vh]">
+            <div
+                ref={previewRef}
+                className="rounded-sm bg-gray-200 w-full h-full p-5"
+            >
+                <h2 className='text-gray-700'>{resumeData.name}</h2>
+                <p>{resumeData.email}</p>
                 <p>{resumeData.message}</p>
             </div>
         </div>
+
     );
 }
 
@@ -45,8 +50,8 @@ function ResumeBuilder() {
     };
 
     return (
-        <div className='w-full h-screen flex flex-col md:flex-row'>
-            <div className='md:w-[50%] h-full p-10'>
+        <div className='w-full h-screen flex flex-col md:flex-row card p-5 bg-gray-800'>
+            <div className='md:w-[50%] h-full p-10 bg-gray-700 card'>
                 <h3 className='text-2xl font-bold mb-5 text-app-gradient'>Resume Builder</h3>
                 <form className='space-y-4'>
                     <input className='input' name="name" placeholder="Name" onChange={handleChange} />
@@ -54,7 +59,7 @@ function ResumeBuilder() {
                 </form>
             </div>
 
-            <div className='md:w-[50%] h-full'>
+            <div className='md:mt-0 mt-5 md:w-[50%] ml-5 flex justify-center items-center'>
                 <ResumePreview resumeData={resumeData} />
             </div>
         </div>

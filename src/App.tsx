@@ -3,7 +3,7 @@ import ResumeBuilder from './pages/ResumeBuilder'
 
 function App() {
   return (
-    <div>
+    <div className=''>
       <ResumeBuilder/>
     </div>
   )
