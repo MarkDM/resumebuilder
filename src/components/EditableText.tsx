@@ -53,7 +53,7 @@ export default function EditableText({ children, className, onChange }: Editable
                 {value || ' '}
             </span>
 
-            {isEditing ? (
+            {isEditing  ? (
                 <input
                     ref={inputRef}
                     type="text"
@@ -62,7 +62,7 @@ export default function EditableText({ children, className, onChange }: Editable
                     onBlur={handleBlur}
                     onKeyDown={handleKeyDown}
                     style={{ width: inputWidth }}
-                    className={`border rounded px-1`}
+                    className='border px-1 focus:border-secondary focus:outline-1 rounded'
                 />
             ) : (
                 <div

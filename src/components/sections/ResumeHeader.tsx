@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import ImageInput from '../ImageInput';
-import EditableText from '../TextInput';
+import EditableText from '../EditableText';
 import type { ResumeDataHeader } from '../../types/ResumeData';
 
 export default function ResumeHeader() {
