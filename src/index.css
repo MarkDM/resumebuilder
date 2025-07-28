@@ -47,7 +47,7 @@
 }
 
 .input {
-  @apply bg-gray-800 border focus:border-primary focus:outline-1 border-gray-500 w-full p-2 rounded-lg;
+  @apply bg-gray-800 border mt-1 text-sm focus:border-primary focus:outline-1 border-gray-500 w-full p-2 rounded-lg;
 }
 
 .text-app-gradient {
@@ -63,7 +63,7 @@
 }
 
 .card {
-  @apply rounded-2xl
+  @apply rounded-lg
 }
 
 html {
@@ -90,6 +90,14 @@ html {
 
 .button-primary {
   @apply rounded-lg bg-primary hover:bg-primary/90 transition-all 
+}
+
+.title-sm {
+  @apply text-sm font-bold py-2
+}
+
+.label-sm {
+  @apply text-sm ml-1 text-gray-300
 }
 
 .button-danger {

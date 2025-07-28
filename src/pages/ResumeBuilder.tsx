@@ -7,7 +7,8 @@ import ImageSelector from '../components/ImageSelector';
 
 interface ResumeData {
     name: string;
-    email: string;
+    lastName: string,
+    role: string;
     image: string;
 }
 
@@ -52,34 +53,31 @@ function ResumePreview({ resumeData }: { resumeData: ResumeData }) {
                     transformOrigin: 'top left',
                 }}
             >
-                <div className="bg-gray-200 w-full h-full p-5">
-                    <div className="flex flex-row items-start">
-
+                <div className="bg-gray-300 w-full h-full p-5">
+                    <div className="flex flex-row items-start h-18">
 
                         {
-
                             resumeData.image && <img
                                 src={resumeData.image}
                                 alt="Preview"
-                                className="rounded-lg aspect-square w-[15%]"
+                                className="rounded-lg aspect-square h-[100%]"
                             />
-
-
                         }
 
                         {
-                            (resumeData.image == '') && <div className="bg-gray-400 rounded-lg aspect-square w-[15%] shrink-0" />
+                            (!resumeData.image) && <div className="bg-gray-400 rounded-lg aspect-square h-[100%] shrink-0" />
                         }
 
 
                         {/* Header fields */}
-                        <div className='flex flex-col items-start ml-5'>
-                            <h2 className=" text-gray-600 font-bold text-[16px] leading-tight whitespace-nowrap overflow-hidden text-ellipsis">
-                                {resumeData.name}
+                        <div className='flex flex-col items-start justify-center ml-5 h-[100%]'>
+                            <h2 className=" text-gray-600 font-bold text-[20px] leading-tight whitespace-nowrap overflow-hidden text-ellipsis">
+                                {(resumeData.name + ' ' + resumeData.lastName) == '' ? 'Your Name' : resumeData.name + ' ' + resumeData.lastName}
                             </h2>
 
                             <h2 className=" text-gray-600 font-semibold text-[14px] leading-tight whitespace-nowrap overflow-hidden text-ellipsis">
-                                {resumeData.email}
+                                {resumeData.role == '' ? 'Your Role' : resumeData.role}
+
                             </h2>
                         </div>
 
@@ -95,8 +93,9 @@ function ResumePreview({ resumeData }: { resumeData: ResumeData }) {
 function ResumeBuilder() {
 
     const [resumeData, setResumeData] = useState<ResumeData>({
-        name: 'Your Name',
-        email: 'Your Email',
+        name: '',
+        lastName: '',
+        role: '',
         image: ''
     });
 
@@ -110,20 +109,42 @@ function ResumeBuilder() {
             <div className='md:w-[50%] h-full p-10 bg-gray-700 card'>
                 <h3 className='text-2xl font-bold mb-5 text-app-gradient'>Resume Builder</h3>
 
-                <h2 className='font-bold text-sm mb-4 text-center'>Profile image</h2>
+                <h2 className='title-sm text-center'>Profile image</h2>
                 <ImageSelector className='mb-5' onChangeImage={(imageB64) => {
                     setResumeData(prev => ({
                         ...prev,
                         image: imageB64
                     }));
                 }} />
-                <form className='space-y-4'>
-                    <input className='input' name="name" placeholder="Name" onChange={handleChange} />
-                    <input className='input' name="email" placeholder="Email" onChange={handleChange} />
+
+                <h2 className='title-sm text-center mb-5'>Personal info</h2>
+
+                <form className='space-y-4 gap-3 grid grid-cols-1 md:grid-cols-2'>
+                    <div>
+                        <label htmlFor='name' className='label-sm'>Fist Name</label>
+                        <input className='input' name="name" id='name' placeholder="Name" onChange={handleChange} />
+                    </div>
+
+                    <div>
+                        <label htmlFor='name' className='label-sm'>Last Name</label>
+                        <input className='input' name="lastName" id='lastName' placeholder="lastName" onChange={handleChange} />
+                    </div>
+
+                    <div>
+                        <label htmlFor='role' className='label-sm'>Desired Role</label>
+                        <input className='input' name="role" id='role' placeholder="Your Role" onChange={handleChange} />
+                    </div>
+
+                    <div>
+                        <label htmlFor='email' className='label-sm'>Email</label>
+                        <input className='input' name="email" id='email' placeholder="Your email" onChange={handleChange} />
+                    </div>
+
                 </form>
             </div>
 
-            <div className='md:mt-0 mt-5 md:w-[50%] ml-5 flex justify-center items-center'>
+            <div className='md:mt-0 mt-5 md:w-[50%] ml-5 flex flex-col justify-center items-center'>
+                <h2 className='title-sm'>Preview</h2>
                 <ResumePreview resumeData={resumeData} />
             </div>
         </div>
