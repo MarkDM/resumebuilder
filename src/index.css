@@ -87,3 +87,15 @@ html {
   opacity: 1;
   transform: translateY(0px);
 }
+
+.button-primary {
+  @apply rounded-lg bg-primary hover:bg-primary/90 transition-all 
+}
+
+.button-danger {
+  @apply rounded-lg bg-red-500 hover:bg-red-500/90 transition-all 
+}
+
+button {
+  cursor: pointer;
+}

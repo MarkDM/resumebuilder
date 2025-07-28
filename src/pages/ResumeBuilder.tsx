@@ -2,12 +2,13 @@ import React, { useEffect, useRef, useState } from 'react';
 import type { ChangeEvent } from 'react';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import ImageSelector from '../components/ImageSelector';
 
 
 interface ResumeData {
     name: string;
     email: string;
-    message: string;
+    image: string;
 }
 
 function ResumePreview({ resumeData }: { resumeData: ResumeData }) {
@@ -54,8 +55,22 @@ function ResumePreview({ resumeData }: { resumeData: ResumeData }) {
                 <div className="bg-gray-200 w-full h-full p-5">
                     <div className="flex flex-row items-start">
 
-                        {/* Image */}
-                        <div className="bg-gray-400 rounded-lg aspect-square w-[15%] shrink-0" />
+
+                        {
+
+                            resumeData.image && <img
+                                src={resumeData.image}
+                                alt="Preview"
+                                className="rounded-lg aspect-square w-[15%]"
+                            />
+
+
+                        }
+
+                        {
+                            (resumeData.image == '') && <div className="bg-gray-400 rounded-lg aspect-square w-[15%] shrink-0" />
+                        }
+
 
                         {/* Header fields */}
                         <div className='flex flex-col items-start ml-5'>
@@ -78,12 +93,11 @@ function ResumePreview({ resumeData }: { resumeData: ResumeData }) {
 
 
 function ResumeBuilder() {
-    const formRef = useRef<HTMLDivElement>(null);
 
     const [resumeData, setResumeData] = useState<ResumeData>({
         name: 'Your Name',
         email: 'Your Email',
-        message: '',
+        image: ''
     });
 
     const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -95,6 +109,14 @@ function ResumeBuilder() {
         <div className='w-full h-screen flex flex-col md:flex-row card p-5 bg-gray-800'>
             <div className='md:w-[50%] h-full p-10 bg-gray-700 card'>
                 <h3 className='text-2xl font-bold mb-5 text-app-gradient'>Resume Builder</h3>
+
+                <h2 className='font-bold text-sm mb-4 text-center'>Profile image</h2>
+                <ImageSelector className='mb-5' onChangeImage={(imageB64) => {
+                    setResumeData(prev => ({
+                        ...prev,
+                        image: imageB64
+                    }));
+                }} />
                 <form className='space-y-4'>
                     <input className='input' name="name" placeholder="Name" onChange={handleChange} />
                     <input className='input' name="email" placeholder="Email" onChange={handleChange} />
