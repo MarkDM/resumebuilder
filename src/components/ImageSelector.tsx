@@ -58,11 +58,11 @@ export default function ImageSelector({ style, className, onChangeImage }: Image
                                 inputRef.current?.click();
                             }}
                             alt="Preview"
-                            className="max-w-64 max-h-32 rounded-lg"
+                            className="max-h-20 rounded-lg"
                         />
                         <div className="flex gap-3">
                             <button
-                                className="px-4 py-2 text-sm button-primary"
+                                className="py-1 px-2 text-xs button-primary"
                                 onClick={(e) => {
                                     e.stopPropagation();
                                     inputRef.current?.click();
@@ -71,7 +71,7 @@ export default function ImageSelector({ style, className, onChangeImage }: Image
                                 Edit
                             </button>
                             <button
-                                className="px-4 py-2 text-sm button-danger"
+                                className="p-1 text-xs button-danger"
                                 onClick={(e) => {
                                     e.stopPropagation();
                                     setImage(null);

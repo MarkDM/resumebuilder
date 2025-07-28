@@ -122,17 +122,17 @@ function ResumeBuilder() {
                 <form className='space-y-4 gap-3 grid grid-cols-1 md:grid-cols-2'>
                     <div>
                         <label htmlFor='name' className='label-sm'>Fist Name</label>
-                        <input className='input' name="name" id='name' placeholder="Name" onChange={handleChange} />
+                        <input className='input' name="name" id='name' placeholder="First name" onChange={handleChange} />
                     </div>
 
                     <div>
                         <label htmlFor='name' className='label-sm'>Last Name</label>
-                        <input className='input' name="lastName" id='lastName' placeholder="lastName" onChange={handleChange} />
+                        <input className='input' name="lastName" id='lastName' placeholder="Last name" onChange={handleChange} />
                     </div>
 
                     <div>
                         <label htmlFor='role' className='label-sm'>Desired Role</label>
-                        <input className='input' name="role" id='role' placeholder="Your Role" onChange={handleChange} />
+                        <input className='input' name="role" id='role' placeholder="Desired role" onChange={handleChange} />
                     </div>
 
                     <div>
