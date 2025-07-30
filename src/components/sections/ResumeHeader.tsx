@@ -26,7 +26,7 @@ export default function ResumeHeader() {
                         ...prev,
                         name: newValue.trim().length == 0 ? 'Click to edit' : newValue
                     }))
-                }} className='text-gray-600 font-bold text-[20px]'>
+                }} className='resume_title'>
                     {resumeData.name}
                 </EditableText>
 
@@ -36,7 +36,7 @@ export default function ResumeHeader() {
                         ...prev,
                         role: newValue.trim().length == 0 ? 'Click to edit' : newValue
                     }))
-                }} className='text-gray-600 font-bold text-[15px]'>
+                }} className='resume_subtitle'>
                     {resumeData.role}
                 </EditableText>
 

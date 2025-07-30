@@ -53,7 +53,7 @@ export default function EditableText({ children, className, onChange }: Editable
                 {value || ' '}
             </span>
 
-            {isEditing  ? (
+            {isEditing ? (
                 <input
                     ref={inputRef}
                     type="text"
@@ -72,7 +72,7 @@ export default function EditableText({ children, className, onChange }: Editable
                     <span>{value}</span>
                     <Pencil
                         size={14}
-                        className="opacity-0 group-hover:opacity-100 transition-opacity"
+                        className="opacity-0 text-lg group-hover:opacity-100 transition-opacity"
                     />
                 </div>
             )}

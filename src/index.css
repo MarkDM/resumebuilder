@@ -66,6 +66,18 @@
   @apply rounded-lg
 }
 
+.resume_title {
+  @apply text-[20px] font-bold text-gray-600;
+}
+
+.resume_subtitle {
+  @apply text-[16px] font-semibold text-gray-600;
+}
+
+.resume_text{
+  @apply text-gray-600 text-sm;
+}
+
 html {
   margin: 0;
   padding: 0;

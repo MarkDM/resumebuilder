@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 
 import type { ResumeData } from '../types/ResumeData';
 import ResumeHeader from '../components/sections/ResumeHeader';
+import ResumeProfessionalSummary from '../components/sections/ResumeProfessionalSummary';
 
 
 
@@ -54,8 +55,9 @@ export default function ResumeBuilder() {
                     transformOrigin: 'top left',
                 }}
             >
-                <div className="bg-gray-300 w-full h-full p-5 rounded-sm">
+                <div className="bg-gray-300 w-full h-full p-8 rounded-sm">
                     <ResumeHeader />
+                    <ResumeProfessionalSummary className='mt-5'/>
                 </div>
             </div>
         </div>
