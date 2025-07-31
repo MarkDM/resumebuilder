@@ -31,7 +31,7 @@ function ResumeWorkExperience({ className }: { className?: string }) {
     ]);
 
     return (
-        <div className={`flex flex-col ${className}`}>
+        <div className={`group/all flex flex-col ${className}`}>
             <div className="flex flex-row items-center gap-2 mb-4">
                 <FaShoppingBag className='resume_subtitle' size={12} />
                 <EditableText className='resume_subtitle'>
@@ -51,9 +51,9 @@ function ResumeWorkExperience({ className }: { className?: string }) {
                     <SortableList>
                         {
                             employments.map((employment) =>
-                                <div className='group relative' key={employment.id}>
+                                <div className='group/item relative' key={employment.id}>
                                     <EmploymentComponent employment={employment} className='ml-5 z-100' />
-                                    <div className="absolute flex -ml-2 left-0 top-0 h-full opacity-0 group-hover:opacity-50 transition-opacity duration-200">
+                                    <div className="absolute flex -ml-2 left-0 top-0 h-full opacity-0 group-hover/item:opacity-50 transition-opacity duration-200">
 
                                         <div className='flex flex-col h-full items-center justify-evenly '>
                                             <button
@@ -82,7 +82,7 @@ function ResumeWorkExperience({ className }: { className?: string }) {
             }
 
 
-            <div className="ml-5 mt-2">
+            <div className="ml-5 mt-2 opacity-0 group-hover/all:opacity-100 transition-opacity duration-200">
                 <button
                     className="text-primary hover:underline text-sm"
                     onClick={() => {
