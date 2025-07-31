@@ -5,6 +5,9 @@ import { FaShoppingBag } from 'react-icons/fa'
 import type { Employment } from '../../../types/Employment';
 import EmploymentComponent from './Employment';
 import SortableList from '../../SortableList';
+import { Hamburger, ListOrdered, Trash } from 'lucide-react';
+import { CgReorder } from 'react-icons/cg';
+import { TbMenuOrder } from 'react-icons/tb';
 
 function ResumeWorkExperience({ className }: { className?: string }) {
 
@@ -40,7 +43,7 @@ function ResumeWorkExperience({ className }: { className?: string }) {
             {
 
                 employments.length === 0 ? (
-                    <div className="ml-5 text-gray-500">
+                    <div className="ml-5 text-sm text-gray-500">
                         No work experience added yet. Click "Add Employment" to start.
                     </div>
                 ) : (
@@ -48,7 +51,27 @@ function ResumeWorkExperience({ className }: { className?: string }) {
                     <SortableList>
                         {
                             employments.map((employment) =>
-                                <EmploymentComponent key={employment.id} employment={employment} className='ml-5' />
+                                <div className='group relative cursor-move' key={employment.id}>
+                                    <EmploymentComponent employment={employment} className='ml-5 z-100' />
+                                    <div className="absolute flex -ml-2 left-0 top-0 h-full opacity-0 group-hover:opacity-50 transition-opacity duration-200">
+
+                                        <div className='flex flex-col h-full items-center justify-evenly '>
+                                            <button
+                                                className="text-red-500 text-sm"
+                                                onClick={() => {
+                                                    setEmployments(employments.filter(e => e.id !== employment.id));
+                                                }}
+                                            >
+                                                <Trash size={16} />
+                                            </button>
+
+                                            <TbMenuOrder className='text-gray-600' size={16} />
+
+                                        </div>
+
+
+                                    </div>
+                                </div>
                             )
                         }
                     </SortableList>
@@ -67,7 +90,8 @@ function ResumeWorkExperience({ className }: { className?: string }) {
                             id: String(employments.length + 1),
                             companyName: 'Compay Name',
                             jobTitle: 'Job Title',
-                            startDate: new Date().toISOString().split('T')[0],
+                            //startDate: new Date().toISOString().split('T')[0],
+                            startDate: '',
                             endDate: '',
                             description: 'Description of the job responsibilities and achievements.'
                         };

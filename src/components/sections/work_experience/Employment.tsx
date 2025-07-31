@@ -15,9 +15,9 @@ function EmploymentComponent({ employment, className }: { employment: Employment
 
 
       <div className='flex flex-row items-center gap-2'>
-        <EditableText className='text-gray-400 text-sm'>{new Date(employment.startDate).toLocaleDateString()}</EditableText>
+        <EditableText className='text-gray-400 text-sm'>{employment.startDate ? new Date(employment.startDate).toLocaleDateString(): '[Set start Date]'}</EditableText>
         <span className='text-gray-400 text-sm'>-</span>
-        <EditableText className='text-gray-400 text-sm'>{employment.endDate ? new Date(employment.endDate).toLocaleDateString() : 'Present'}</EditableText>
+        <EditableText className='text-gray-400 text-sm'>{employment.endDate ? new Date(employment.endDate).toLocaleDateString() : '[Set end Date]'}</EditableText>
       </div>
 
 
