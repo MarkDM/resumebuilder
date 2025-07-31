@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import type { ResumeData } from '../types/ResumeData';
 import ResumeHeader from '../components/sections/ResumeHeader';
 import ResumeProfessionalSummary from '../components/sections/ResumeProfessionalSummary';
+import ResumeWorkExperience from '../components/sections/work_experience/ResumeWorkExperience';
 
 
 
@@ -58,6 +59,7 @@ export default function ResumeBuilder() {
                 <div className="bg-gray-300 w-full h-full p-8 rounded-sm">
                     <ResumeHeader />
                     <ResumeProfessionalSummary className='mt-5'/>
+                    <ResumeWorkExperience className='mt-5'/>
                 </div>
             </div>
         </div>

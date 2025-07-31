@@ -8,7 +8,7 @@ type EditableTextProps = {
 };
 
 export default function EditableText({ children, className, onChange }: EditableTextProps) {
-    const initialText = typeof children === 'string' ? children : 'xxxx';
+    const initialText = typeof children === 'string' ? children : '';
     const [isEditing, setIsEditing] = useState(false);
     const [value, setValue] = useState(initialText);
     const inputRef = useRef<HTMLInputElement>(null);
@@ -70,10 +70,10 @@ export default function EditableText({ children, className, onChange }: Editable
                     className="cursor-pointer inline-flex items-center gap-1"
                 >
                     <span>{value}</span>
-                    <Pencil
+                    {/* <Pencil
                         size={14}
                         className="opacity-0 text-lg group-hover:opacity-100 transition-opacity"
-                    />
+                    /> */}
                 </div>
             )}
         </div>

@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect, type ReactNode } from 'react';
 import ReactQuill from 'react-quill-new';
-import 'react-quill-new/dist/quill.snow.css';
 
 type RichTextInlineEditorProps = {
   children?: ReactNode;
@@ -25,8 +24,6 @@ export default function RichTextInlineEditor({
       : `<p>${children}</p>`
     : '<p>Click to edit</p>';
 
-  //const BtnAlignCenter = createButton('Align center', '≡', 'justifyCenter');
-
 
   const [content, setContent] = useState<string>(initialContent);
   const [isEditing, setIsEditing] = useState(false);
@@ -36,16 +33,15 @@ export default function RichTextInlineEditor({
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
-        if (isEditing) {
-          const html = '';
-
-        }
+        onChange?.(content);
         setIsEditing(false);
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [isEditing, onChange]);
+
+
 
   return (
     <div ref={containerRef} className={className}>
@@ -54,7 +50,10 @@ export default function RichTextInlineEditor({
       ) : (
 
         <div
-          className="prose max-w-none rounded p-2 hover:shadow cursor-pointer"
+        style={{
+          padding: '0px',
+        }}
+          className="p-0 ql-editor max-w-none rounded hover:shadow cursor-pointer"
           onClick={() => setIsEditing(true)}
           dangerouslySetInnerHTML={{ __html: content }}
         />
