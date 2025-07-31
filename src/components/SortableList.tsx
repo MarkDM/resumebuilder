@@ -30,12 +30,30 @@ function SortableItem({ id, children }: { id: string; children: ReactNode }) {
         cursor: 'grab',
     };
 
+    const handlePointerDown = (e: React.PointerEvent) => {
+        const target = e.target as HTMLElement;
+        if (
+            target.tagName === 'INPUT' ||
+            target.tagName === 'TEXTAREA' ||
+            target.isContentEditable
+        ) {
+            e.stopPropagation(); // Prevent drag start
+        }
+    };
+
     return (
-        <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
+        <div
+            ref={setNodeRef}
+            style={style}
+            {...attributes}
+            {...listeners}
+            onPointerDownCapture={handlePointerDown}
+        >
             {children}
         </div>
     );
 }
+
 
 type SortableListProps = {
     children: ReactNode[];
@@ -52,9 +70,11 @@ export default function SortableList({ children }: SortableListProps) {
 
     }, [children]);
 
+
     const sensors = useSensors(
         useSensor(PointerSensor, {
-            activationConstraint: { distance: 5 },
+            activationConstraint: { distance: 5, },
+
         })
     );
 

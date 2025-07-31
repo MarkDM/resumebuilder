@@ -5,6 +5,7 @@ import ResumeHeader from '../components/sections/ResumeHeader';
 import ResumeProfessionalSummary from '../components/sections/ResumeProfessionalSummary';
 import ResumeWorkExperience from '../components/sections/work_experience/ResumeWorkExperience';
 import SortableList from '../components/SortableList';
+import ResumePersonalData from '../components/sections/ResumePersonalData';
 
 
 
@@ -57,10 +58,25 @@ export default function ResumeBuilder() {
                     transformOrigin: 'top left',
                 }}
             >
-                <div className="bg-gray-100 w-full h-full p-8 rounded-sm">
-                    <ResumeHeader />
-                    <ResumeProfessionalSummary className='mt-5'/>
-                    <ResumeWorkExperience className='mt-5'/>
+                <div className="bg-gray-100 w-full h-full p-5 rounded-sm">
+                    <ResumeHeader className='mb-5' />
+
+                    <div className='flex item'>
+                        <div className='flex-3'>
+                            <ResumeProfessionalSummary className='mb-5 mr-2' />
+                            <ResumeWorkExperience className='mr-2'/>
+                        </div>
+
+                        <div className='w-[1px] bg-gray-300'></div>
+
+                        <div className='flex-1 ml-5'>
+
+                            <ResumePersonalData>
+
+                            </ResumePersonalData>
+                        </div>
+
+                    </div>
 
                 </div>
             </div>

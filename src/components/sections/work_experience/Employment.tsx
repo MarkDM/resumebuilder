@@ -14,10 +14,10 @@ function EmploymentComponent({ employment, className }: { employment: Employment
       </div>
 
 
-      <div className='flex flex-row items-center gap-2'>
-        <EditableText className='text-gray-400 text-sm'>{employment.startDate ? new Date(employment.startDate).toLocaleDateString(): '[Set start Date]'}</EditableText>
-        <span className='text-gray-400 text-sm'>-</span>
-        <EditableText className='text-gray-400 text-sm'>{employment.endDate ? new Date(employment.endDate).toLocaleDateString() : '[Set end Date]'}</EditableText>
+      <div className='flex flex-row items-center gap-2 my-1'>
+        <EditableText className='text-gray-400 text-[12px]'>{employment.startDate ? new Date(employment.startDate).toLocaleDateString(): '[Set start Date]'}</EditableText>
+        <span className='text-gray-400 text-[12px]'>-</span>
+        <EditableText className='text-gray-400 text-[12px]'>{employment.endDate ? new Date(employment.endDate).toLocaleDateString() : '[Set end Date]'}</EditableText>
       </div>
 
 

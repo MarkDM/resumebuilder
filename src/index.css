@@ -71,16 +71,16 @@
 }
 
 .resume_subtitle {
-  @apply text-[17px] font-semibold text-gray-600;
+  @apply text-[15px] font-semibold text-gray-600;
 }
 
 .resume_subtitle_md {
-  @apply text-[15px] font-semibold text-gray-600;
+  @apply text-[13px] font-semibold text-gray-600;
 }
 
 
 .resume_text{
-  @apply text-gray-600 text-[14px];
+  @apply text-gray-600 text-[12px];
 }
 
 html {

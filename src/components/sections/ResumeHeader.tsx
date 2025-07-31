@@ -3,7 +3,7 @@ import ImageInput from '../ImageInput';
 import EditableText from '../EditableText';
 import type { ResumeDataHeader } from '../../types/ResumeData';
 
-export default function ResumeHeader() {
+export default function ResumeHeader({className}: { className?: string }) {
 
     const [resumeData, setResumeData] = useState<ResumeDataHeader>({
         name: 'Your Name',
@@ -13,7 +13,7 @@ export default function ResumeHeader() {
 
     return (
 
-        <div className="flex flex-row items-start h-18">
+        <div className={`${className} flex flex-row items-start h-18`}>
             <ImageInput onChangeImage={(imageBase64: string) => {
                 setResumeData(prev => ({
                     ...prev,

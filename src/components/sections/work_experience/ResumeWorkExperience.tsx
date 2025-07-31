@@ -12,14 +12,14 @@ import { TbMenuOrder } from 'react-icons/tb';
 function ResumeWorkExperience({ className }: { className?: string }) {
 
     const [employments, setEmployments] = useState<Employment[]>([
-        // {
-        //     id: '1',
-        //     companyName: 'Tech Solutions Inc.',
-        //     jobTitle: 'Software Engineer',
-        //     startDate: '2020-01-15',
-        //     endDate: '2022-06-30',
-        //     description: 'Developed and maintained web applications using React and Node.js.'
-        // },
+        {
+            id: '1',
+            companyName: 'Company Name',
+            jobTitle: 'Employment Title',
+            startDate: '',
+            endDate: '',
+            description: 'Description of the job responsibilities and achievements.'
+        },
         // {
         //     id: '2',
         //     companyName: 'Creative Agency Ltd.',
@@ -51,7 +51,7 @@ function ResumeWorkExperience({ className }: { className?: string }) {
                     <SortableList>
                         {
                             employments.map((employment) =>
-                                <div className='group relative cursor-move' key={employment.id}>
+                                <div className='group relative' key={employment.id}>
                                     <EmploymentComponent employment={employment} className='ml-5 z-100' />
                                     <div className="absolute flex -ml-2 left-0 top-0 h-full opacity-0 group-hover:opacity-50 transition-opacity duration-200">
 
@@ -84,12 +84,12 @@ function ResumeWorkExperience({ className }: { className?: string }) {
 
             <div className="ml-5 mt-2">
                 <button
-                    className="text-blue-500 hover:underline text-sm"
+                    className="text-primary hover:underline text-sm"
                     onClick={() => {
                         const newEmployment: Employment = {
                             id: String(employments.length + 1),
                             companyName: 'Compay Name',
-                            jobTitle: 'Job Title',
+                            jobTitle: 'Employment Title',
                             //startDate: new Date().toISOString().split('T')[0],
                             startDate: '',
                             endDate: '',
