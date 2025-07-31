@@ -4,6 +4,7 @@ import RichTextInlineEditor from '../../RichTextInlineEditor'
 import { FaShoppingBag } from 'react-icons/fa'
 import type { Employment } from '../../../types/Employment';
 import EmploymentComponent from './Employment';
+import SortableList from '../../SortableList';
 
 function ResumeWorkExperience({ className }: { className?: string }) {
 
@@ -29,25 +30,34 @@ function ResumeWorkExperience({ className }: { className?: string }) {
     return (
         <div className={`flex flex-col ${className}`}>
             <div className="flex flex-row items-center gap-2 mb-4">
-                <FaShoppingBag className='resume_subtitle' size={14} />
+                <FaShoppingBag className='resume_subtitle' size={12} />
                 <EditableText className='resume_subtitle'>
                     Work Experience
                 </EditableText>
             </div>
 
-            {/* <RichTextInlineEditor className="mt-2 resume_text" onChange={(newValue) => { console.log(`New summary: ${newValue}`) }}>
-                Write a brief summary of your professional background, skills, and career goals. This section should highlight your key achievements and what you bring to potential employers.
-            </RichTextInlineEditor> */}
 
             {
-                employments.map((employment) => (
-                    <div>
-                        <EmploymentComponent key={employment.id} employment={employment} className='ml-5' />
-                        <hr className='mx-5 text-gray-400  my-4' />
 
+                employments.length === 0 ? (
+                    <div className="ml-5 text-gray-500">
+                        No work experience added yet. Click "Add Employment" to start.
                     </div>
-                ))
+                ) : (
+
+                    <SortableList>
+                        {
+                            employments.map((employment) =>
+                                <EmploymentComponent key={employment.id} employment={employment} className='ml-5' />
+                            )
+                        }
+                    </SortableList>
+
+                )
+
+
             }
+
 
             <div className="ml-5 mt-2">
                 <button

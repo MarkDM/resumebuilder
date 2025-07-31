@@ -7,7 +7,7 @@ function ResumeProfessionalSummary({ className }: { className?: string }) {
     return (
         <div className={`flex flex-col ${className}`}>
             <div className="flex flex-row items-center gap-2">
-                <FaUser className='resume_subtitle' size={14} />
+                <FaUser className='resume_subtitle' size={12} />
                 <EditableText className='resume_subtitle'>
                     Professional summary
                 </EditableText>

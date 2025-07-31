@@ -22,6 +22,8 @@ function EmploymentComponent({ employment, className }: { employment: Employment
 
 
       <RichTextInlineEditor className="resume_text mt-3">{employment.description}</RichTextInlineEditor>
+
+      <hr className='my-2 text-gray-300'></hr>
     </div>
   )
 }

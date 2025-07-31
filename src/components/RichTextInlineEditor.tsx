@@ -50,10 +50,11 @@ export default function RichTextInlineEditor({
       ) : (
 
         <div
-        style={{
-          padding: '0px',
-        }}
-          className="p-0 ql-editor max-w-none rounded hover:shadow cursor-pointer"
+          style={{
+            padding: '0px',
+
+          }}
+          className="p-0 ql-editor max-w-none rounded cursor-pointer"
           onClick={() => setIsEditing(true)}
           dangerouslySetInnerHTML={{ __html: content }}
         />
