@@ -25,6 +25,7 @@ export interface ResumePersonalData {
 }
 
 export interface ResumeData {
+    id: string;
     header: ResumeHeader
     professionalSummary: ResumeProfessionalSummary;
     workExperience: ResumeWorkExperience;

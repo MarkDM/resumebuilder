@@ -17,6 +17,7 @@ export default function RichTextInlineEditor({
   onChange,
 }: RichTextInlineEditorProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const quillRef = useRef<ReactQuill>(null);
 
   const initialContent = isString(children)
     ? children.trim().startsWith('<')
@@ -28,33 +29,32 @@ export default function RichTextInlineEditor({
   const [content, setContent] = useState<string>(initialContent);
   const [isEditing, setIsEditing] = useState(false);
 
-
-  // Click outside to save
   useEffect(() => {
 
-    if (!isEditing) {
-      //document.removeEventListener('mousedown', handleClickOutside)
-      return;
-    };
+    // const handleClickOutside = (e: MouseEvent) => {
+    //   if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+    //     onChange?.(content);
+    //     setIsEditing(false);
+    //     //document.removeEventListener('mousedown', handleClickOutside);
+    //   }
+    // };
 
-    const handleClickOutside = (e: MouseEvent) => {
-      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
-        onChange?.(content);
-        setIsEditing(false);
-      }
-    };
+    quillRef.current?.getEditor().focus();
 
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [isEditing, onChange]);
+    //document.addEventListener('mousedown', handleClickOutside);
+    //return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [isEditing,]);
 
 
 
   return (
     <div ref={containerRef} className={className}>
       {isEditing ? (
-        <ReactQuill theme="snow" value={content} onChange={setContent} />
+        <ReactQuill ref={quillRef} theme="snow" value={content} onBlur={() => {
+          //console.log('Blur event triggered, saving content:', content);
+          onChange?.(content);
+          setIsEditing(false);
+        }} onChange={setContent} />
       ) : (
 
         <div

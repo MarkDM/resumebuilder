@@ -3,6 +3,7 @@ import ResumeHeader from '../components/sections/ResumeHeader';
 import ResumeProfessionalSummary from '../components/sections/ResumeProfessionalSummary';
 import ResumeWorkExperience from '../components/sections/work_experience/ResumeWorkExperience';
 import ResumePersonalData from '../components/sections/ResumePersonalData';
+import { useResumeStore } from '../stores/ResumeStore';
 
 
 
@@ -13,6 +14,7 @@ export default function ResumeBuilder() {
     const BASE_WIDTH = 595; // A4 width in px @72dpi
     const BASE_HEIGHT = 842;
 
+    const saveResumeToJSON = useResumeStore((state) => state.saveResumeToJSON);
 
     useEffect(() => {
         function handleResize() {
@@ -40,6 +42,11 @@ export default function ResumeBuilder() {
 
     return (
         <div ref={containerRef} className="aspect-[210/297] w-full max-w-[60vh]">
+
+            <button onClick={saveResumeToJSON}>
+                Save as json
+            </button>
+
             <div
                 style={{
                     width: `${BASE_WIDTH}px`,
@@ -60,10 +67,7 @@ export default function ResumeBuilder() {
                         <div className='w-[1px] bg-gray-300'></div>
 
                         <div className='flex-1 ml-5'>
-
-                            <ResumePersonalData>
-
-                            </ResumePersonalData>
+                            <ResumePersonalData />
                         </div>
 
                     </div>

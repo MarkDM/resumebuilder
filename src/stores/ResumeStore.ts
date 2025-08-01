@@ -10,10 +10,13 @@ type Actions = {
     updateEmployment: (employment: ResumeData['workExperience']['employments'][number]) => void;
     setResumePersonalData: (personalData: ResumeData['personalData']) => void;
     resetResumeData: () => void;
+    saveResumeToJSON: () => void;
+    loadResumeFromJSON: (json: string) => void;
 }
 
 
 const initialState: ResumeData = {
+    id: 'default',
     header: {
         name: 'Your Name',
         role: 'Desired role',
@@ -64,7 +67,6 @@ export const useResumeStore = create<ResumeData & Actions>((set) => ({
         }
     })),
     updateEmployment: (employment) => {
-
         //console.log('Updating employment:', employment);
         set((state) => ({
 
@@ -77,5 +79,29 @@ export const useResumeStore = create<ResumeData & Actions>((set) => ({
         }))
 
     },
-    resetResumeData: () => set(initialState)
+    resetResumeData: () => set(initialState),
+    saveResumeToJSON: () => {
+
+        const state = useResumeStore.getState();
+        const resumeData = JSON.stringify(state, null, 2);
+        //localStorage.setItem('resumeData', resumeData);
+        //Save json as file
+        const blob = new Blob([resumeData], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `resume_${state.id}.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    },
+    loadResumeFromJSON: (json) => {
+        try {
+            const resumeData = JSON.parse(json);
+            set(resumeData);
+        } catch (error) {
+            console.error('Failed to load resume data from JSON:', error);
+        }
+    }
 }));
