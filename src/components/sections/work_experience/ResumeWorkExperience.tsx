@@ -6,34 +6,27 @@ import EmploymentComponent from './Employment';
 import SortableList from '../../SortableList';
 import { Trash } from 'lucide-react';
 import { TbMenuOrder } from 'react-icons/tb';
+import { useResumeStore } from '../../../stores/ResumeStore';
 
 function ResumeWorkExperience({ className }: { className?: string }) {
 
-    const [employments, setEmployments] = useState<Employment[]>([
-        {
-            id: '1',
-            companyName: 'Company Name',
-            jobTitle: 'Employment Title',
-            startDate: '',
-            endDate: '',
-            description: 'Description of the job responsibilities and achievements.'
-        },
-        // {
-        //     id: '2',
-        //     companyName: 'Creative Agency Ltd.',
-        //     jobTitle: 'Frontend Developer',
-        //     startDate: '2018-03-01',
-        //     endDate: '2019-12-31',
-        //     description: 'Worked on UI/UX design and implementation for various client projects.'
-        // }
-    ]);
+    const workExperience = useResumeStore((state) => state.workExperience);
+    const addEmployment = useResumeStore((state) => state.addEmployment);
+    const removeEmployment = useResumeStore((state) => state.removeEmployment);
+    const setWorkExperience = useResumeStore((state) => state.setResumeWorkExperience);
+    const employments = workExperience.employments;
 
     return (
         <div className={`group/all flex flex-col ${className}`}>
             <div className="flex flex-row items-center gap-2 mb-4">
                 <FaShoppingBag className='resume_subtitle' size={12} />
-                <EditableText className='resume_subtitle'>
-                    Work Experience
+                <EditableText className='resume_subtitle' onChange={(newValue) => {
+                    setWorkExperience({
+                        ...workExperience,
+                        title: newValue.trim().length == 0 ? 'Work Experience' : newValue
+                    });
+                }}>
+                    {workExperience.title}
                 </EditableText>
             </div>
 
@@ -57,7 +50,7 @@ function ResumeWorkExperience({ className }: { className?: string }) {
                                             <button
                                                 className="text-red-500 text-sm"
                                                 onClick={() => {
-                                                    setEmployments(employments.filter(e => e.id !== employment.id));
+                                                    removeEmployment(employment.id);
                                                 }}
                                             >
                                                 <Trash size={16} />
@@ -93,7 +86,7 @@ function ResumeWorkExperience({ className }: { className?: string }) {
                             endDate: '',
                             description: 'Description of the job responsibilities and achievements.'
                         };
-                        setEmployments([...employments, newEmployment]);
+                        addEmployment(newEmployment);
                     }}
                 >
                     Add Employment

@@ -5,11 +5,15 @@ type Actions = {
     setResumeHeader: (header: ResumeData['header']) => void;
     setResumeProfessionalSummary: (summary: ResumeData['professionalSummary']) => void;
     setResumeWorkExperience: (workExperience: ResumeData['workExperience']) => void;
+    addEmployment: (employment: ResumeData['workExperience']['employments'][number]) => void;
+    removeEmployment: (employmentId: string) => void;
+    updateEmployment: (employment: ResumeData['workExperience']['employments'][number]) => void;
     setResumePersonalData: (personalData: ResumeData['personalData']) => void;
     resetResumeData: () => void;
 }
 
-export const useResumeStore = create<ResumeData & Actions>((set) => ({
+
+const initialState: ResumeData = {
     header: {
         name: 'Your Name',
         role: 'Desired role',
@@ -21,25 +25,57 @@ export const useResumeStore = create<ResumeData & Actions>((set) => ({
     },
     workExperience: {
         title: 'Work Experience',
-        employments: []
+        employments: [
+            {
+                id: '1',
+                companyName: 'Company Name',
+                jobTitle: 'Employment Title',
+                startDate: '',
+                endDate: '',
+                description: 'Description of the job responsibilities and achievements.'
+            }
+        ]
     },
     personalData: {
         title: 'Personal Data',
-        phone: '',
-        email: '',
-        birthTitle: '',
-        birthDate: '' // ISO date string
+        phone: '+00 (00) 123 4567',
+        email: 'email@provider.com',
+        birthTitle: 'Born on',
+        birthDate: '01/01/1990' // ISO date string
     },
+}
 
+export const useResumeStore = create<ResumeData & Actions>((set) => ({
+    ...initialState,
     setResumeHeader: (header) => set({ header }),
     setResumeProfessionalSummary: (summary) => set({ professionalSummary: summary }),
     setResumeWorkExperience: (workExperience) => set({ workExperience }),
     setResumePersonalData: (personalData) => set({ personalData }),
+    addEmployment: (employment) => set((state) => ({
+        workExperience: {
+            ...state.workExperience,
+            employments: [...state.workExperience.employments, employment]
+        }
+    })),
+    removeEmployment: (employmentId) => set((state) => ({
+        workExperience: {
+            ...state.workExperience,
+            employments: state.workExperience.employments.filter(e => e.id !== employmentId)
+        }
+    })),
+    updateEmployment: (employment) => {
 
-    resetResumeData: () => set({
-        header: { name: '', role: '', image: '' },
-        professionalSummary: undefined,
-        workExperience: undefined,
-        personalData: undefined
-    })
+        //console.log('Updating employment:', employment);
+        set((state) => ({
+
+            workExperience: {
+                ...state.workExperience,
+                employments: state.workExperience.employments.map(e =>
+                    e.id === employment.id ? employment : e
+                )
+            }
+        }))
+
+    },
+    resetResumeData: () => set(initialState)
 }));

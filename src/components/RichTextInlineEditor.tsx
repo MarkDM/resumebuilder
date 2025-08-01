@@ -31,12 +31,20 @@ export default function RichTextInlineEditor({
 
   // Click outside to save
   useEffect(() => {
+
+    if (!isEditing) {
+      //document.removeEventListener('mousedown', handleClickOutside)
+      return;
+    };
+
     const handleClickOutside = (e: MouseEvent) => {
       if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
         onChange?.(content);
         setIsEditing(false);
       }
     };
+
+
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [isEditing, onChange]);
