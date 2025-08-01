@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import type { ResumeData } from '../types/ResumeData';
 
 type Actions = {
+    setResumeId: (id: string) => void;
     setResumeHeader: (header: ResumeData['header']) => void;
     setResumeProfessionalSummary: (summary: ResumeData['professionalSummary']) => void;
     setResumeWorkExperience: (workExperience: ResumeData['workExperience']) => void;
@@ -50,6 +51,7 @@ const initialState: ResumeData = {
 
 export const useResumeStore = create<ResumeData & Actions>((set) => ({
     ...initialState,
+    setResumeId: (id) => set({ id }),
     setResumeHeader: (header) => set({ header }),
     setResumeProfessionalSummary: (summary) => set({ professionalSummary: summary }),
     setResumeWorkExperience: (workExperience) => set({ workExperience }),
@@ -90,7 +92,7 @@ export const useResumeStore = create<ResumeData & Actions>((set) => ({
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = `resume_${state.id}.json`;
+        a.download = `resume_${state.id.replaceAll(" ", "")}.json`;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);

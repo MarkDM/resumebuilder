@@ -59,7 +59,7 @@
 }
 
 .shadow-hover:hover {
-  @apply shadow-lg shadow-primary/30 hover:shadow-xl;
+  @apply shadow-lg shadow-primary/30 hover:shadow-lg;
 }
 
 .card {
