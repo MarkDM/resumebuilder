@@ -1,12 +1,10 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import EditableText from '../../EditableText'
-import RichTextInlineEditor from '../../RichTextInlineEditor'
 import { FaShoppingBag } from 'react-icons/fa'
 import type { Employment } from '../../../types/Employment';
 import EmploymentComponent from './Employment';
 import SortableList from '../../SortableList';
-import { Hamburger, ListOrdered, Trash } from 'lucide-react';
-import { CgReorder } from 'react-icons/cg';
+import { Trash } from 'lucide-react';
 import { TbMenuOrder } from 'react-icons/tb';
 
 function ResumeWorkExperience({ className }: { className?: string }) {

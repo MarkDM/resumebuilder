@@ -1,43 +1,44 @@
 import React, { useState } from 'react'
 import ImageInput from '../ImageInput';
 import EditableText from '../EditableText';
-import type { ResumeDataHeader } from '../../types/ResumeData';
+import type { ResumeHeader } from '../../types/ResumeData';
+import { useResumeStore } from '../../stores/ResumeStore';
 
-export default function ResumeHeader({className}: { className?: string }) {
+export default function ResumeHeader({ className }: { className?: string }) {
 
-    const [resumeData, setResumeData] = useState<ResumeDataHeader>({
-        name: 'Your Name',
-        role: 'Desired role',
-        image: ''
-    });
+    const resumeHeader = useResumeStore((state) => state.header);
+    const setResumeHeader = useResumeStore((state) => state.setResumeHeader);
 
     return (
 
         <div className={`${className} flex flex-row items-start h-18`}>
             <ImageInput onChangeImage={(imageBase64: string) => {
-                setResumeData(prev => ({
-                    ...prev,
+                setResumeHeader({
+                    ...resumeHeader,
                     image: imageBase64
-                }));
+                });
             }} />
             <div className='flex flex-col items-start justify-center ml-5 h-[100%]'>
                 <EditableText onChange={(newValue) => {
-                    setResumeData(prev => ({
-                        ...prev,
+
+                    setResumeHeader({
+                        ...resumeHeader,
                         name: newValue.trim().length == 0 ? 'Click to edit' : newValue
-                    }))
+                    });
+
+                    setResumeHeader
                 }} className='resume_title'>
-                    {resumeData.name}
+                    {resumeHeader.name}
                 </EditableText>
 
 
                 <EditableText onChange={(newValue) => {
-                    setResumeData(prev => ({
-                        ...prev,
+                    setResumeHeader({
+                        ...resumeHeader,
                         role: newValue.trim().length == 0 ? 'Click to edit' : newValue
-                    }))
+                    });
                 }} className='resume_subtitle'>
-                    {resumeData.role}
+                    {resumeHeader.role}
                 </EditableText>
 
             </div>

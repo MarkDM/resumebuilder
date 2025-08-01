@@ -1,10 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react'
-
-import type { ResumeData } from '../types/ResumeData';
+import { useEffect, useRef, useState } from 'react'
 import ResumeHeader from '../components/sections/ResumeHeader';
 import ResumeProfessionalSummary from '../components/sections/ResumeProfessionalSummary';
 import ResumeWorkExperience from '../components/sections/work_experience/ResumeWorkExperience';
-import SortableList from '../components/SortableList';
 import ResumePersonalData from '../components/sections/ResumePersonalData';
 
 
@@ -16,13 +13,6 @@ export default function ResumeBuilder() {
     const BASE_WIDTH = 595; // A4 width in px @72dpi
     const BASE_HEIGHT = 842;
 
-    const [resumeData, setResumeData] = useState<ResumeData>({
-        header: {
-            name: '',
-            role: '',
-            image: ''
-        }
-    });
 
     useEffect(() => {
         function handleResize() {
@@ -64,7 +54,7 @@ export default function ResumeBuilder() {
                     <div className='flex item'>
                         <div className='flex-3'>
                             <ResumeProfessionalSummary className='mb-5 mr-2' />
-                            <ResumeWorkExperience className='mr-2'/>
+                            <ResumeWorkExperience className='mr-2' />
                         </div>
 
                         <div className='w-[1px] bg-gray-300'></div>
