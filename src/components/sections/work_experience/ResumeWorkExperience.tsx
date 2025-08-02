@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import EditableText from '../../EditableText'
-import { FaShoppingBag } from 'react-icons/fa'
+import { FaPlusCircle, FaShoppingBag } from 'react-icons/fa'
 import type { Employment } from '../../../types/Employment';
 import EmploymentComponent from './Employment';
 import SortableList from '../../SortableList';
-import { Trash } from 'lucide-react';
+import { Plus, PlusCircle, PlusCircleIcon, Trash } from 'lucide-react';
 import { TbMenuOrder } from 'react-icons/tb';
 import { useResumeStore } from '../../../stores/ResumeStore';
 
@@ -28,6 +28,24 @@ function ResumeWorkExperience({ className }: { className?: string }) {
                 }}>
                     {workExperience.title}
                 </EditableText>
+
+                <button
+                    className="flex text-primary hover:underline text-sm opacity-0 group-hover/all:opacity-100 transition-opacity duration-200"
+                    onClick={() => {
+                        const newEmployment: Employment = {
+                            id: String(employments.length + 1),
+                            companyName: 'Compay Name',
+                            jobTitle: 'Employment Title',
+                            //startDate: new Date().toISOString().split('T')[0],
+                            startDate: '',
+                            endDate: '',
+                            description: 'Description of the job responsibilities and achievements.'
+                        };
+                        addEmployment(newEmployment);
+                    }}
+                >
+                    <FaPlusCircle size={16} className="inline" />
+                </button>
             </div>
 
 
@@ -35,7 +53,7 @@ function ResumeWorkExperience({ className }: { className?: string }) {
 
                 employments.length === 0 ? (
                     <div className="ml-5 text-sm text-gray-500">
-                        No work experience added yet. Click "Add Employment" to start.
+                        No work experience added yet. Click "Add" to start.
                     </div>
                 ) : (
 
@@ -72,27 +90,6 @@ function ResumeWorkExperience({ className }: { className?: string }) {
 
             }
 
-
-            <div className="ml-5 mt-2 opacity-0 group-hover/all:opacity-100 transition-opacity duration-200">
-                <button
-                    className="text-primary hover:underline text-sm"
-                    onClick={() => {
-                        const newEmployment: Employment = {
-                            id: String(employments.length + 1),
-                            companyName: 'Compay Name',
-                            jobTitle: 'Employment Title',
-                            //startDate: new Date().toISOString().split('T')[0],
-                            startDate: '',
-                            endDate: '',
-                            description: 'Description of the job responsibilities and achievements.'
-                        };
-                        addEmployment(newEmployment);
-                    }}
-                >
-                    Add Employment
-                </button>
-
-            </div>
 
         </div>
     )

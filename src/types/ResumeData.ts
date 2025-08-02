@@ -1,3 +1,4 @@
+import type { EducationInstitution } from "./EducationInstitution";
 import type { Employment } from "./Employment";
 
 export interface ResumeHeader {
@@ -24,10 +25,16 @@ export interface ResumePersonalData {
     birthDate: string; // ISO date string
 }
 
+export interface ResumeEducation {
+    title: string;
+    institutions: EducationInstitution[];
+}
+
 export interface ResumeData {
     id: string;
     header: ResumeHeader
     professionalSummary: ResumeProfessionalSummary;
     workExperience: ResumeWorkExperience;
     personalData: ResumePersonalData;
+    education: ResumeEducation;
 }

@@ -6,6 +6,9 @@ type Actions = {
     setResumeHeader: (header: ResumeData['header']) => void;
     setResumeProfessionalSummary: (summary: ResumeData['professionalSummary']) => void;
     setResumeWorkExperience: (workExperience: ResumeData['workExperience']) => void;
+    addEducationInstitution: (institution: ResumeData['education']['institutions'][number]) => void;
+    setEducation: (education: ResumeData['education']) => void;
+    removeEducationInstitution: (education: ResumeData['education']['institutions'][number]) => void;
     addEmployment: (employment: ResumeData['workExperience']['employments'][number]) => void;
     removeEmployment: (employmentId: string) => void;
     updateEmployment: (employment: ResumeData['workExperience']['employments'][number]) => void;
@@ -47,6 +50,19 @@ const initialState: ResumeData = {
         birthTitle: 'Born on',
         birthDate: '01/01/1990' // ISO date string
     },
+    education: {
+        title: 'Education',
+        institutions: [
+            {
+                id: '1',
+                name: 'Institution Name',
+                degree: 'Degree Title',
+                startDate: '',
+                endDate: '',
+                description: 'Description of the degree and any relevant coursework or achievements.'
+            }
+        ]
+    }
 }
 
 export const useResumeStore = create<ResumeData & Actions>((set) => ({
@@ -56,6 +72,19 @@ export const useResumeStore = create<ResumeData & Actions>((set) => ({
     setResumeProfessionalSummary: (summary) => set({ professionalSummary: summary }),
     setResumeWorkExperience: (workExperience) => set({ workExperience }),
     setResumePersonalData: (personalData) => set({ personalData }),
+    setEducation: (education) => set({ education }),
+    addEducationInstitution: (institution) => set((state) => ({
+        education: {
+            ...state.education,
+            institutions: [...state.education.institutions, institution]
+        }
+    })),
+    removeEducationInstitution: (institution) => set((state) => ({
+        education: {
+            ...state.education,
+            institutions: state.education.institutions.filter(i => i.id !== institution.id)
+        }
+    })),
     addEmployment: (employment) => set((state) => ({
         workExperience: {
             ...state.workExperience,
