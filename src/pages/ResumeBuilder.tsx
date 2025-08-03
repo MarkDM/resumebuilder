@@ -152,11 +152,11 @@ export default function ResumeBuilder() {
                         <div className="bg-gray-100 w-full h-full p-5 rounded-sm">
                             <ResumeHeader className='mb-5' />
 
-                            <div className='flex item'>
+                            <div className='flex'>
                                 <div className='flex-3'>
                                     <ResumeProfessionalSummary className='mb-5 mr-2' />
                                     <ResumeWorkExperience className='mb-5 mr-2' />
-                                    <ResumeEducation className='mr-2' />
+                                    <ResumeEducation className='mb-5 mr-2' />
                                 </div>
 
                                 <div className='w-[1px] bg-gray-300'></div>

@@ -3,6 +3,7 @@ import type { Employment } from '../../../types/Employment'
 import EditableText from '../../EditableText'
 import RichTextInlineEditor from '../../RichTextInlineEditor'
 import { useResumeStore } from '../../../stores/ResumeStore';
+import DateLabelPicker from '../../DateLabelPicker';
 
 function EmploymentComponent({ employment, className }: { employment: Employment, className?: string }) {
 
@@ -34,24 +35,26 @@ function EmploymentComponent({ employment, className }: { employment: Employment
 
 
       <div className='flex flex-row items-center gap-2 my-1'>
-        <EditableText className='text-gray-400 text-[12px]'
-          onChange={(newValue) => {
+
+        <DateLabelPicker className='text-gray-400 text-[12px]' date={employment.startDate} onChange={
+          (newDate) => {
             updateEmployment({
               ...employment,
-              startDate: new Date(newValue).toLocaleDateString()
+              startDate: newDate
             });
-          }}>
-          {employment.startDate ? new Date(employment.startDate).toLocaleDateString() : '[Set start Date]'}
-        </EditableText>
+          }
+        } />
         <span className='text-gray-400 text-[12px]'>-</span>
-        <EditableText className='text-gray-400 text-[12px]' onChange={(newValue) => {
-          updateEmployment({
-            ...employment,
-            endDate: new Date(newValue).toLocaleDateString()
-          });
-        }}>
-          {employment.endDate ? new Date(employment.endDate).toLocaleDateString() : '[Set end Date]'}
-        </EditableText>
+
+        <DateLabelPicker className='text-gray-400 text-[12px]' date={employment.endDate || new Date()} onChange={
+          (newDate) => {
+            updateEmployment({
+              ...employment,
+              endDate: newDate
+            });
+          }
+        } />
+
       </div>
 
 

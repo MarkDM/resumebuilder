@@ -9,6 +9,7 @@ type Actions = {
     addEducationInstitution: (institution: ResumeData['education']['institutions'][number]) => void;
     setEducation: (education: ResumeData['education']) => void;
     removeEducationInstitution: (education: ResumeData['education']['institutions'][number]) => void;
+    updateEducationInstitution: (institution: ResumeData['education']['institutions'][number]) => void;
     addEmployment: (employment: ResumeData['workExperience']['employments'][number]) => void;
     removeEmployment: (employmentId: string) => void;
     updateEmployment: (employment: ResumeData['workExperience']['employments'][number]) => void;
@@ -37,8 +38,7 @@ const initialState: ResumeData = {
                 id: '1',
                 companyName: 'Company Name',
                 jobTitle: 'Employment Title',
-                startDate: '',
-                endDate: '',
+                startDate: new Date(), // Current date as default
                 description: 'Description of the job responsibilities and achievements.'
             }
         ]
@@ -77,6 +77,14 @@ export const useResumeStore = create<ResumeData & Actions>((set) => ({
         education: {
             ...state.education,
             institutions: [...state.education.institutions, institution]
+        }
+    })),
+    updateEducationInstitution: (institution) => set((state) => ({
+        education: {
+            ...state.education,
+            institutions: state.education.institutions.map(i =>
+                i.id === institution.id ? institution : i
+            )
         }
     })),
     removeEducationInstitution: (institution) => set((state) => ({

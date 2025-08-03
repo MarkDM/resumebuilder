@@ -37,8 +37,7 @@ function ResumeWorkExperience({ className }: { className?: string }) {
                             companyName: 'Compay Name',
                             jobTitle: 'Employment Title',
                             //startDate: new Date().toISOString().split('T')[0],
-                            startDate: '',
-                            endDate: '',
+                            startDate:  new Date(),
                             description: 'Description of the job responsibilities and achievements.'
                         };
                         addEmployment(newEmployment);
