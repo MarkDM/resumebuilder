@@ -48,7 +48,7 @@ const initialState: ResumeData = {
         phone: '+00 (00) 123 4567',
         email: 'email@provider.com',
         birthTitle: 'Born on',
-        birthDate: '01/01/1990' // ISO date string
+        birthDate: new Date() // ISO date string
     },
     education: {
         title: 'Education',
@@ -57,8 +57,8 @@ const initialState: ResumeData = {
                 id: '1',
                 name: 'Institution Name',
                 degree: 'Degree Title',
-                startDate: '',
-                endDate: '',
+                startDate: new Date(), // Current date as default
+                endDate: undefined, // Optional end date
                 description: 'Description of the degree and any relevant coursework or achievements.'
             }
         ]

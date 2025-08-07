@@ -1,4 +1,5 @@
 import { useResumeStore } from '../../stores/ResumeStore';
+import DateLabelPicker from '../DateLabelPicker';
 import EditableText from '../EditableText'
 
 function ResumePersonalData({ className }: { className?: string }) {
@@ -44,15 +45,19 @@ function ResumePersonalData({ className }: { className?: string }) {
                 {personalData.birthTitle ?? 'Born on'}
             </EditableText>
 
-            <EditableText className='resume_text font-semibold mt-1 text-start' onChange={(newValue) => {
-                setPersonalData({
-                    ...personalData,
-                    birthDate: newValue.trim().length == 0 ? '01 January 1990' : newValue
-                });
-            }}>
-                {personalData.birthDate}
-            </EditableText>
 
+
+            <DateLabelPicker
+                className='text-gray-600 text-[12px] mt-1'
+                date={personalData.birthDate ?? new Date()}
+                onChange={(newDate) => {
+                    setPersonalData({
+                        ...personalData,
+                        birthDate: newDate ?? new Date()
+                    });
+                }}
+                showMonthYearPicker={false}
+            />
         </div>
     )
 }

@@ -36,24 +36,20 @@ function EmploymentComponent({ employment, className }: { employment: Employment
 
       <div className='flex flex-row items-center gap-2 my-1'>
 
-        <DateLabelPicker className='text-gray-400 text-[12px]' date={employment.startDate} onChange={
-          (newDate) => {
-            updateEmployment({
-              ...employment,
-              startDate: newDate
-            });
-          }
-        } />
+        <DateLabelPicker className='text-gray-400 text-[12px]' date={employment.startDate} onChange={(newDate) => {
+          updateEmployment({
+            ...employment,
+            startDate: newDate
+          });
+        }} showMonthYearPicker={true} />
         <span className='text-gray-400 text-[12px]'>-</span>
 
-        <DateLabelPicker className='text-gray-400 text-[12px]' date={employment.endDate || new Date()} onChange={
-          (newDate) => {
-            updateEmployment({
-              ...employment,
-              endDate: newDate
-            });
-          }
-        } />
+        <DateLabelPicker className='text-gray-400 text-[12px]' date={employment.endDate || new Date()} onChange={(newDate) => {
+          updateEmployment({
+            ...employment,
+            endDate: newDate
+          });
+        }} showMonthYearPicker={true} />
 
       </div>
 

@@ -149,7 +149,7 @@ export default function ResumeBuilder() {
                             transformOrigin: 'top left',
                         }}
                     >
-                        <div className="bg-gray-100 w-full h-full p-5 rounded-sm">
+                        <div className="bg-gray-300 w-full h-full p-5 rounded-sm">
                             <ResumeHeader className='mb-5' />
 
                             <div className='flex'>

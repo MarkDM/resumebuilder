@@ -33,8 +33,8 @@ function ResumeEducation({ className }: { className?: string }) {
                             id: String(education.institutions.length + 1),
                             name: 'Institution Name',
                             degree: 'Degree title',
-                            startDate: '',
-                            endDate: '',
+                            startDate: new Date(),
+                            endDate: undefined,
                             description: 'Description of the degree and any relevant coursework or achievements.'
                         };
                         addEducationInstitution(newInstitution);

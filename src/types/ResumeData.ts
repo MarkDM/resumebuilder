@@ -22,7 +22,7 @@ export interface ResumePersonalData {
     phone: string;
     email: string;
     birthTitle: string;
-    birthDate: string; // ISO date string
+    birthDate: Date; // ISO date string
 }
 
 export interface ResumeEducation {

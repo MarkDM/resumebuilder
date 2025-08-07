@@ -63,7 +63,7 @@
 }
 
 .card {
-  @apply rounded-lg
+  @apply rounded-lg;
 }
 
 .resume_title {
@@ -78,9 +78,15 @@
   @apply text-[13px] font-semibold text-gray-600;
 }
 
-
-.resume_text{
+.resume_text {
   @apply text-gray-600 text-[12px];
+}
+
+.react-datepicker__current-month,
+.react-datepicker-time__header,
+.react-datepicker-year-header {
+  font-size: 0.7rem !important;
+
 }
 
 html {
@@ -106,19 +112,19 @@ html {
 }
 
 .button-primary {
-  @apply rounded-lg bg-primary hover:bg-primary/90 transition-all 
+  @apply rounded-lg bg-primary hover:bg-primary/90 transition-all;
 }
 
 .title-sm {
-  @apply text-sm font-bold py-2
+  @apply text-sm font-bold py-2;
 }
 
 .label-sm {
-  @apply text-sm ml-1 text-gray-300
+  @apply text-sm ml-1 text-gray-300;
 }
 
 .button-danger {
-  @apply rounded-lg bg-red-500 hover:bg-red-500/90 transition-all 
+  @apply rounded-lg bg-red-500 hover:bg-red-500/90 transition-all;
 }
 
 button {

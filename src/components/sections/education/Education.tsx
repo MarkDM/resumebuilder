@@ -3,6 +3,7 @@ import type { EducationInstitution } from '../../../types/EducationInstitution'
 import EditableText from '../../EditableText';
 import { useResumeStore } from '../../../stores/ResumeStore';
 import RichTextInlineEditor from '../../RichTextInlineEditor';
+import DateLabelPicker from '../../DateLabelPicker';
 
 function Education({ className, institution }: { className?: string, institution: EducationInstitution }) {
 
@@ -33,24 +34,22 @@ function Education({ className, institution }: { className?: string, institution
 
 
                 <div className='flex flex-row items-center gap-2 my-1'>
-                    <EditableText className='text-gray-400 text-[12px]'
-                        onChange={(newValue) => {
-                            updateEducationInstitution({
-                                ...institution,
-                                startDate: new Date(newValue).toLocaleDateString()
-                            });
-                        }}>
-                        {institution.startDate ? new Date(institution.startDate).toLocaleDateString() : '[Set start Date]'}
-                    </EditableText>
-                    <span className='text-gray-400 text-[12px]'>-</span>
-                    <EditableText className='text-gray-400 text-[12px]' onChange={(newValue) => {
+
+                    <DateLabelPicker className='text-gray-400 text-[12px]' date={institution.startDate || new Date()} onChange={(newDate) => {
                         updateEducationInstitution({
                             ...institution,
-                            endDate: new Date(newValue).toLocaleDateString()
+                            startDate: newDate
                         });
-                    }}>
-                        {institution.endDate ? new Date(institution.endDate).toLocaleDateString() : '[Set end Date]'}
-                    </EditableText>
+                    }} showMonthYearPicker={true} />
+
+
+                    <span className='text-gray-400 text-[12px]'>-</span>
+                    <DateLabelPicker className='text-gray-400 text-[12px]' date={institution.endDate || new Date()} onChange={(newDate) => {
+                        updateEducationInstitution({
+                            ...institution,
+                            endDate: newDate
+                        });
+                    }} showMonthYearPicker={true} />
                 </div>
 
                 <RichTextInlineEditor className="resume_text mt-3" onChange={(newValue) => {
