@@ -32,7 +32,7 @@
 :root {
   color-scheme: dark;
   --primary-color: #3b82f6;
-  --secondary-color: var(--color-cyan-400);
+  --secondary-color: #5395ff;
   --accent-color: var(--color-amber-400);
   --text-color: #f3f4f6;
   --color-tertiary: var(--color-bg-gray-800);

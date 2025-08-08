@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import type { Skill } from '../../../types/Skill'
-import { Edit } from 'lucide-react'
 import EditableText from '../../EditableText'
 
 type Props = {
@@ -42,10 +41,14 @@ function SkillComponent({ skill, onLevelChange, className }: Props) {
                 {skill.name}
             </EditableText>
 
+
             <input
+                data-tooltip-id="my-tooltip"
+                data-tooltip-content="Skill level"
+                data-tooltip-place="bottom"
                 style={
                     {
-                        background: `linear-gradient(to right, var(--primary-color) ${Math.min(Math.max(((level - minLevel) / (maxLevel - minLevel)) * 100, 0), 100)}%, #ddd ${Math.min(Math.max(((level - minLevel) / (maxLevel - minLevel)) * 100, 0), 100)}%)`
+                        background: `linear-gradient(to right, var(--secondary-color) ${Math.min(Math.max(((level - minLevel) / (maxLevel - minLevel)) * 100, 0), 100)}%, #ddd ${Math.min(Math.max(((level - minLevel) / (maxLevel - minLevel)) * 100, 0), 100)}%)`
                     }
                 }
                 type="range"
@@ -58,7 +61,7 @@ function SkillComponent({ skill, onLevelChange, className }: Props) {
                 className="w-[80%] h-2 rounded appearance-none cursor-pointer"
             />
 
-
+            {/* <Tooltip id="my-tooltip" /> */}
         </div>
     )
 }

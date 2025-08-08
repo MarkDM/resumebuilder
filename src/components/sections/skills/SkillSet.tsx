@@ -32,7 +32,7 @@ function SkillSet({ className }: { className?: string }) {
                     onClick={() => {
                         const newSkill = {
                             id: String(skillSet.skills.length + 1),
-                            name: "New skill",
+                            name: "Skill name",
                             level: 9,
                         };
                         addSkill(newSkill);
