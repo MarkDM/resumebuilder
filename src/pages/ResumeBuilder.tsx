@@ -8,6 +8,8 @@ import FileSelector from '../components/FileSelector';
 import EditableText from '../components/EditableText';
 import { ChevronDown, ChevronUp, Download } from 'lucide-react';
 import ResumeEducation from '../components/sections/education/ResumeEducation';
+import ResumeLinks from '../components/sections/links/ResumeLinks';
+import SkillSet from '../components/sections/skills/SkillSet';
 
 
 
@@ -153,7 +155,7 @@ export default function ResumeBuilder() {
                             <ResumeHeader className='mb-5' />
 
                             <div className='flex'>
-                                <div className='flex-3'>
+                                <div className='flex-2'>
                                     <ResumeProfessionalSummary className='mb-5 mr-2' />
                                     <ResumeWorkExperience className='mb-5 mr-2' />
                                     <ResumeEducation className='mb-5 mr-2' />
@@ -163,6 +165,8 @@ export default function ResumeBuilder() {
 
                                 <div className='flex-1 ml-5'>
                                     <ResumePersonalData />
+                                    <ResumeLinks className='mt-5' />
+                                    <SkillSet className='mt-5' />
                                 </div>
 
                             </div>

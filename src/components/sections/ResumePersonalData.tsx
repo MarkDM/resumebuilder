@@ -18,7 +18,7 @@ function ResumePersonalData({ className }: { className?: string }) {
                 {personalData.title}
             </EditableText>
 
-            <EditableText className='resume_text font-semibold mt-1 text-start' onChange={(newValue) => {
+            <EditableText className='font-semibold  text-gray-500 text-[12px] mt-1' onChange={(newValue) => {
                 setPersonalData({
                     ...personalData,
                     phone: newValue.trim().length == 0 ? '+00 (00) 123 4567' : newValue
@@ -27,7 +27,7 @@ function ResumePersonalData({ className }: { className?: string }) {
                 {personalData.phone}
             </EditableText>
 
-            <EditableText className='resume_text font-semibold mt-1 text-start' onChange={(newValue) => {
+            <EditableText className='font-semibold  text-gray-500 text-[12px] mt-1' onChange={(newValue) => {
                 setPersonalData({
                     ...personalData,
                     email: newValue.trim().length == 0 ? 'email@email.com' : newValue
@@ -45,10 +45,8 @@ function ResumePersonalData({ className }: { className?: string }) {
                 {personalData.birthTitle ?? 'Born on'}
             </EditableText>
 
-
-
             <DateLabelPicker
-                className='text-gray-600 text-[12px] mt-1'
+                className='font-semibold  text-gray-500 text-[12px] mt-1'
                 date={personalData.birthDate ?? new Date()}
                 onChange={(newDate) => {
                     setPersonalData({
@@ -58,6 +56,25 @@ function ResumePersonalData({ className }: { className?: string }) {
                 }}
                 showMonthYearPicker={false}
             />
+
+
+            <EditableText className='resume_text font-semibold mt-5 text-start' onChange={(newValue) => {
+                setPersonalData({
+                    ...personalData,
+                    nationalityTitle: newValue.trim().length == 0 ? 'Nationality' : newValue
+                });
+            }}>
+                {personalData.nationalityTitle ?? 'Nationality'}
+            </EditableText>
+
+            <EditableText className='font-semibold  text-gray-500 text-[12px] mt-1' onChange={(newValue) => {
+                setPersonalData({
+                    ...personalData,
+                    nationality: newValue.trim().length == 0 ? 'Nationality' : newValue
+                });
+            }}>
+                {personalData.nationality ?? '[Your Nationality]'}
+            </EditableText>
         </div>
     )
 }

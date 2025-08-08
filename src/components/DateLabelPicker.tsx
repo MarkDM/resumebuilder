@@ -5,7 +5,6 @@ import { format as formatDateFn } from 'date-fns';
 
 type DateLabelPickerProps = {
   date: Date | null;
-  format?: string;
   className?: string;
   showMonthYearPicker?: boolean;
   onChange?: (newValue: Date) => void;
@@ -13,7 +12,6 @@ type DateLabelPickerProps = {
 
 export default function DateLabelPicker({
   date,
-  format = 'MM/yyyy',
   className,
   showMonthYearPicker = true,
   onChange,
@@ -56,6 +54,8 @@ export default function DateLabelPicker({
       (navigator.languages?.[0] || navigator.language)) ||
     'en-US';
 
+  const format = 'MM/dd/yyyy'; // en-US format: month/day/year
+
   const effectiveDisplay = selectedDate
     ? showMonthYearPicker
       ? new Intl.DateTimeFormat(locale, { month: 'long', year: 'numeric' }).format(selectedDate)
@@ -65,6 +65,7 @@ export default function DateLabelPicker({
   const datePickerFormat = showMonthYearPicker ? 'MMMM yyyy' : format;
 
   return (
+
     <div ref={containerRef} className={`${className ?? ''} relative inline-block`}>
       <div
         onClick={() => setShowCalendar(true)}
@@ -74,13 +75,16 @@ export default function DateLabelPicker({
       </div>
 
       {showCalendar && (
-        <div ref={calendarRef} className="absolute mt-2 z-10 shadow-lg border border-gray-200 rounded bg-white">
+        <div ref={calendarRef} className="absolute mt-2 z-1000 shadow-lg border border-gray-200 rounded bg-white">
           <DatePicker
+            dropdownMode='select'
             selected={selectedDate}
             locale={locale}
             onClickOutside={() => setShowCalendar(false)}
             showMonthYearPicker={showMonthYearPicker}
             dateFormat={datePickerFormat}
+            // scrollableYearDropdown
+            // yearDropdownItemNumber={100} // Show 100 years to scroll easily
             onChange={(d) => {
               if (d) {
                 setSelectedDate(d);

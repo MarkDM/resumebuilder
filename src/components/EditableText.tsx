@@ -29,6 +29,8 @@ export default function EditableText({ children, className, onChange }: Editable
         if (spanRef.current) {
             setInputWidth(spanRef.current.offsetWidth + 2); // add a bit of padding
         }
+
+        onChange?.(value);
     }, [value, isEditing]);
 
     const handleBlur = () => {

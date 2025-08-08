@@ -14,6 +14,14 @@ type Actions = {
     removeEmployment: (employmentId: string) => void;
     updateEmployment: (employment: ResumeData['workExperience']['employments'][number]) => void;
     setResumePersonalData: (personalData: ResumeData['personalData']) => void;
+    setResumeLinks: (links: ResumeData['links']) => void;
+    updateResumeLink: (link: ResumeData['links']['links'][number]) => void;
+    addResumeLink: (link: ResumeData['links']['links'][number]) => void;
+    removeResumeLink: (linkId: string) => void;
+    setSkillSet: (skillSet: ResumeData['skillSet']) => void;
+    updateSkill: (skill: ResumeData['skillSet']['skills'][number]) => void;
+    addSkill: (skill: ResumeData['skillSet']['skills'][number]) => void;
+    removeSkill: (skillId: string) => void;
     resetResumeData: () => void;
     saveResumeToJSON: () => void;
     loadResumeFromJSON: (json: string) => void;
@@ -62,6 +70,15 @@ const initialState: ResumeData = {
                 description: 'Description of the degree and any relevant coursework or achievements.'
             }
         ]
+    }
+    ,
+    links: {
+        title: 'Links',
+        links: []
+    },
+    skillSet: {
+        title: 'Skills',
+        skills: []
     }
 }
 
@@ -118,6 +135,48 @@ export const useResumeStore = create<ResumeData & Actions>((set) => ({
         }))
 
     },
+    setResumeLinks: (links) => set({ links }),
+    addResumeLink: (link) => set((state) => ({
+        links: {
+            ...state.links,
+            links: [...state.links.links, link]
+        }
+    })),
+    updateResumeLink: (link) => set((state) => ({
+        links: {
+            ...state.links,
+            links: state.links.links.map(l =>
+                l.id === link.id ? link : l
+            )
+        }
+    })),
+    removeResumeLink: (linkId) => set((state) => ({
+        links: {
+            ...state.links,
+            links: state.links.links.filter(l => l.id !== linkId)
+        }
+    })),
+    setSkillSet: (skillSet) => set({ skillSet }),
+    updateSkill: (skill) => set((state) => ({
+        skillSet: {
+            ...state.skillSet,
+            skills: state.skillSet.skills.map(s =>
+                s.id === skill.id ? skill : s
+            )
+        }
+    })),
+    addSkill: (skill) => set((state) => ({
+        skillSet: {
+            ...state.skillSet,
+            skills: [...state.skillSet.skills, skill]
+        }
+    })),
+    removeSkill: (skillId) => set((state) => ({
+        skillSet: {
+            ...state.skillSet,
+            skills: state.skillSet.skills.filter(s => s.id !== skillId)
+        }
+    })),
     resetResumeData: () => set(initialState),
     saveResumeToJSON: () => {
 

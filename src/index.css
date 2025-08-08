@@ -86,7 +86,32 @@
 .react-datepicker-time__header,
 .react-datepicker-year-header {
   font-size: 0.7rem !important;
+}
 
+input[type="range"] {
+  -webkit-appearance: none;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+}
+
+input[type="range"]:hover::-webkit-slider-runnable-track {
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 12px; /* REQUIRED */
+  width: 12px; /* REQUIRED */
+  border-radius: 50%;
+  opacity: 0;
+  transition: all 0.2s ease;
+  /* ...my custom edits... */
+}
+
+input[type="range"]:hover::-webkit-slider-thumb {
+  background-color: var(--primary-color);
+  opacity: 1;
+  /* ...my custom edits... */
 }
 
 html {
